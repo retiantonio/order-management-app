@@ -1,0 +1,54 @@
+#productVB {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.2, 0, 4);
+}
+
+#productViewTF {
+    -fx-background-color: transparent;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+}
+
+#productNameTF {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+
+}
+
+#productPriceTF {
+    -fx-background-color: transparent;
+
+    -fx-text-fill: linear-gradient(to right, #ED6663, #43658B);
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+#productOrderButton {
+    -fx-background-color: linear-gradient(to right, #ED6663, #f08482);
+    -fx-background-radius: 12px;
+
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.2, 0, 4);
+}
+
+#productModifyButton {
+    -fx-background-color: linear-gradient(to right, #43658b, #6883a2);
+    -fx-background-radius: 12px;
+
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.2, 0, 4);
+}
+
+
+

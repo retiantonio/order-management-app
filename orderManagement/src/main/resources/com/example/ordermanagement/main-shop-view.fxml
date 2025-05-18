@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/main-shop-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.MainShopController">
+   <top>
+      <AnchorPane id="mainShopTopPane" prefHeight="61.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="mainShopLogoLabel" layoutX="14.0" layoutY="13.0" text="Raltex" />
+            <HBox alignment="CENTER" layoutX="1106.0" layoutY="11.0" spacing="10.0">
+               <children>
+                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#addNewProduct">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../IMAGES/plus-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button id="mainShopTopButton" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView id="mainShopTopButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../IMAGES/shopping-cart-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="mainShopTopButton" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../IMAGES/clients-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <FlowPane fx:id="mainShopFlowPane" hgap="15.0" prefHeight="649.0" prefWidth="1280.0" vgap="15.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
+         </padding></FlowPane>
+   </center>
+</BorderPane>
