@@ -5,6 +5,11 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.2, 0, 4);
 }
 
+#productVB:hover {
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.2, 0, 4);*/
+    -fx-effect: dropshadow(gaussian, rgba(67, 101, 139, 0.75), 20, 0.2, 0, 4);
+}
+
 #productViewTF {
     -fx-background-color: transparent;
 
@@ -17,7 +22,40 @@
     -fx-border-color: transparent;
     -fx-font-size: 20px;
     -fx-font-weight: 700;
+}
 
+#productInStoreTF {
+    -fx-background-color: transparent;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #73A788;
+}
+
+#productStockTF {
+    -fx-background-color: transparent;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #C8A01C;
+}
+
+#productStockLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #C8A01C;
+}
+
+#productPriceLabel {
+    -fx-text-fill: linear-gradient(to right, #ED6663, #43658B);
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+#productRatingLabel {
+    -fx-text-fill: #FFD43B;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
 }
 
 #productPriceTF {
@@ -26,6 +64,17 @@
     -fx-text-fill: linear-gradient(to right, #ED6663, #43658B);
     -fx-font-size: 20px;
     -fx-font-weight: 700;
+
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+#productRatingTF {
+    -fx-background-color: transparent;
+
+    -fx-text-fill: #FFD43B;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
 }
 
 #productOrderButton {

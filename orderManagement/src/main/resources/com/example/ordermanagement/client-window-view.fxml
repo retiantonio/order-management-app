@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/main-shop-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.MainShopController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/main-shop-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.ClientWindowController">
    <top>
-      <AnchorPane id="mainShopTopPane" prefHeight="61.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="mainShopTopPane" prefHeight="61.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label id="mainShopLogoLabel" layoutX="14.0" layoutY="13.0" text="TrueBolt">
                <graphic>
@@ -23,38 +23,22 @@
                      </image>
                   </ImageView>
                </graphic></Label>
-            <HBox alignment="CENTER" layoutX="710.0" layoutY="13.0">
+            <HBox alignment="CENTER_LEFT" layoutX="993.0" layoutY="13.0" spacing="10.0">
                <children>
-                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#addNewProduct" text="Add product">
+                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#addNewClient" text="Add Client">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../IMAGES/plus-icon.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
-                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#switchToShoppingCart" text="Shopping Cart">
-                     <graphic>
-                        <ImageView id="mainShopTopButton" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../IMAGES/shopping-cart-icon.png" />
-                           </image>
-                        </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#switchToOrderWindow" text="Order Page">
+                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#switchToProductPage" text="Product Page">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../IMAGES/order-icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
-                  <Button id="mainShopTopButton" mnemonicParsing="false" onAction="#switchToClientWindow" text="Client Page">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../IMAGES/clients-icon.png" />
+                              <Image url="@../../../IMAGES/back-arrow-icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -67,7 +51,7 @@
    <center>
       <ScrollPane id="mainAppScrollPane" BorderPane.alignment="CENTER">
          <content>
-            <FlowPane fx:id="mainShopFlowPane" alignment="TOP_CENTER" columnHalignment="CENTER" hgap="15.0" prefHeight="658.0" prefWidth="1280.0" vgap="15.0">
+            <FlowPane id="mainShopFlowPane" fx:id="clientWindowFlowPane" hgap="15.0" prefHeight="659.0" prefWidth="1280.0" vgap="15.0">
                <padding>
                   <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
                </padding>

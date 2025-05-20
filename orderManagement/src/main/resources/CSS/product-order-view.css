@@ -1,0 +1,52 @@
+#productOrderNameLabel {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+#productOrderPriceLabel {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-text-fill: linear-gradient(to right, #ED6663, #43658B);
+}
+
+#productOrderHB {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.2, 0, 4);
+}
+
+.spinner {
+    -fx-padding: 4px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #746D6D;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.spinner:hover {
+    -fx-border-color: #000000;
+}
+
+.spinner .text-field {
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #ffffff;
+}
+
+.spinner .increment-arrow,
+.spinner .decrement-arrow {
+    -fx-background-color: #746D6D;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #000000;
+}
+
+

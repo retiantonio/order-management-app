@@ -1,33 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/ordering-product-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.OrderProductController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/ordering-product-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.OrderingProductController">
    <left>
-      <AnchorPane prefHeight="720.0" prefWidth="749.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="orderingProductLeftPane" prefHeight="720.0" prefWidth="749.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="bigStyleLabel" layoutX="289.0" layoutY="36.0" text="My Shopping Cart" />
-            <VBox fx:id="orderProductCartVBox" layoutX="65.0" layoutY="101.0" prefHeight="520.0" prefWidth="619.0" />
+            <Label id="bigStyleLabel" layoutX="65.0" layoutY="27.0" text="My Shopping Cart:" />
+            <VBox fx:id="orderProductCartVBox" layoutX="65.0" layoutY="63.0" prefHeight="552.0" prefWidth="619.0" spacing="15.0">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding></VBox>
          </children>
       </AnchorPane>
    </left>
    <center>
       <AnchorPane id="checkoutPane" prefHeight="720.0" prefWidth="518.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="checkoutButton" layoutX="134.0" layoutY="490.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="263.0" text="Checkout" />
+            <Button fx:id="checkoutButton" layoutX="135.0" layoutY="371.0" mnemonicParsing="false" onAction="#checkout" prefHeight="60.0" prefWidth="263.0" text="Checkout" />
             <Label id="bigStyleLabel" layoutX="191.0" layoutY="63.0" text="Order Summary" />
-            <VBox fx:id="orderSummaryVBox" layoutX="109.0" layoutY="116.0" prefHeight="315.0" prefWidth="314.0" />
+            <VBox id="orderSummaryVB" fx:id="orderSummaryVBox" layoutX="109.0" layoutY="110.0" prefHeight="183.0" prefWidth="314.0" spacing="15.0">
+               <children>
+                  <Label id="bigStyleLabel" text="Payment" />
+                  <Label id="mediumStyleLabel" fx:id="orderingProductProductsLabel" text="Products:" />
+                  <Label id="mediumStyleLabel" fx:id="orderingProductDeliveryFeeLabel" text="Delivery Fee:" />
+                  <HBox alignment="CENTER_LEFT" spacing="4.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="4.0">
+                           <children>
+                              <Label id="mediumStyleLabel" text="Client:" />
+                              <Label id="mediumStyleLabel" fx:id="orderingViewClientLabel" text="select a client" />
+                           </children>
+                        </HBox>
+                        <Button id="orderingWindowButton" mnemonicParsing="false" onAction="#addClient">
+                           <graphic>
+                              <ImageView id="orderingWIndowButton" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../IMAGES/plus-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label id="bigStyleLabel" fx:id="orderingProductTotalLabel" text="Total:" />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding></VBox>
          </children>
       </AnchorPane>
    </center>
    <top>
       <AnchorPane id="orderProductTopPane" prefHeight="61.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="logoLabelStyle" layoutX="14.0" layoutY="13.0" text="Raltex" />
+            <Label id="logoLabelStyle" layoutX="14.0" layoutY="13.0" text="TrueBolt">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/logo-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Label>
+            <Button id="orderingWindowButton" layoutX="1134.0" layoutY="13.0" mnemonicParsing="false" onAction="#switchToProductPage" text="Product Page">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/back-arrow-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
    </top>

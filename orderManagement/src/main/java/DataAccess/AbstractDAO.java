@@ -1,5 +1,7 @@
 package DataAccess;
 
+import DataModel.Bill;
+
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.*;
@@ -10,10 +12,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @Author: Technical University of Cluj-Napoca, Romania Distributed Systems
- *          Research Laboratory, http://dsrl.coned.utcluj.ro/
- * @Since: Apr 03, 2017
- * @Source http://www.java-blog.com/mapping-javaobjects-database-reflection-generics
+ * Abstract generic Data Access Object (DAO) class that provides basic CRUD operations
+ * for any data model class using Java Reflection and JDBC.
+ *
+ * <p>It is designed to work with JavaBeans-style classes, where each property has
+ * a corresponding getter and setter method.</p>
+ *
+ * <p>Intended to be extended by concrete DAO classes such as {@code ProductDAO},
+ * {@code OrderDAO}, etc.</p>
+ *
+ * @param <T> the type of the entity handled by this DAO
  */
 
 public class AbstractDAO<T> {
@@ -21,11 +29,21 @@ public class AbstractDAO<T> {
 
 	private final Class<T> type;
 
+	/**
+	 * Constructs a new {@code AbstractDAO} and determines the actual type parameter {@code T}
+	 * using reflection.
+	 */
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
 		this.type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
+	/**
+	 * Constructs a SQL SELECT query by a given field name.
+	 *
+	 * @param field the field to use in the WHERE clause
+	 * @return the SQL SELECT query string
+	 */
 	private String createSelectQuery(String field) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
@@ -36,11 +54,16 @@ public class AbstractDAO<T> {
 		return sb.toString();
 	}
 
+	/**
+	 * Finds and returns all records from the corresponding database table.
+	 *
+	 * @return a list of all records mapped to instances of type {@code T}
+	 */
 	public List<T> findAll() {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		String query = "SELECT * FROM " + type.getSimpleName();
+		String query = "SELECT * FROM " + resolveTableName(type.getSimpleName());
 
 		try {
 			connection = DatabaseConnection.getConnection();
@@ -49,7 +72,7 @@ public class AbstractDAO<T> {
 
 			return createObjects(resultSet);
 		} catch (SQLException ex) {
-			Logger.getLogger(AbstractDAO.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		} finally {
 			DatabaseConnection.close(resultSet);
 			DatabaseConnection.close(statement);
@@ -59,6 +82,12 @@ public class AbstractDAO<T> {
 		return null;
 	}
 
+	/**
+	 * Finds a record in the database by its ID.
+	 *
+	 * @param id the ID of the entity
+	 * @return an instance of {@code T} if found, otherwise {@code null}
+	 */
 	public T findById(int id) {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -81,7 +110,14 @@ public class AbstractDAO<T> {
 		return null;
 	}
 
-	public T insert(T t) { //to check
+	/**
+	 * Inserts a new entity into the database.
+	 * Automatically skips fields named {@code id} (assumed to be auto-generated).
+	 *
+	 * @param t the entity to insert
+	 * @return the inserted entity, possibly with its ID field set
+	 */
+	public T insert(T t) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 
@@ -99,7 +135,6 @@ public class AbstractDAO<T> {
 			for (Field field : fields) {
 				field.setAccessible(true);
 
-				// Skip 'id' field (assumed to be auto-increment primary key)
 				if (field.getName().equalsIgnoreCase("id")) continue;
 
 				if (!first) {
@@ -123,24 +158,26 @@ public class AbstractDAO<T> {
 
 			System.out.println(type.getSimpleName());
 			System.out.println(query);
+
 			statement.executeUpdate();
 
 			ResultSet generatedKeys = statement.getGeneratedKeys();
-			if (generatedKeys.next()) {
-				Field idField = type.getDeclaredField("id");
-				idField.setAccessible(true);
 
-				Object key = generatedKeys.getObject(1);
+			if(!(type.getSimpleName().equals("Bill")))
+				if (generatedKeys.next()) {
+					Field idField = type.getDeclaredField("id");
+					idField.setAccessible(true);
 
-				if(key instanceof Number) {
-					idField.set(t, ((Number)key).intValue());
-				} else {
-					throw new IllegalStateException("Generated key is not a number: " + key);
+					Object key = generatedKeys.getObject(1);
+
+					if(key instanceof Number) {
+						idField.set(t, ((Number)key).intValue());
+					} else {
+						throw new IllegalStateException("Generated key is not a number: " + key);
+					}
 				}
-			}
 
 		} catch (SQLException | IllegalAccessException | NoSuchFieldException e) {
-			//LOGGER.log(Level.WARNING, type.getName() + "DAO:insert " + e.getMessage());
 			e.printStackTrace();
 		} finally {
 			DatabaseConnection.close(statement);
@@ -150,6 +187,12 @@ public class AbstractDAO<T> {
 		return t;
 	}
 
+	/**
+	 * Updates an existing entity in the database based on its ID.
+	 *
+	 * @param t the entity to update
+	 * @return the updated entity
+	 */
 	public T update(T t) { //to check
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -196,6 +239,44 @@ public class AbstractDAO<T> {
 		return t;
 	}
 
+	/**
+	 * Deletes an entity from the database by its ID.
+	 *
+	 * @param id the ID of the entity to delete
+	 * @return true if the deletion was successful, false otherwise
+	 */
+	public boolean delete(int id) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+
+		String query = "DELETE FROM " + resolveTableName(type.getSimpleName()) + " WHERE id = ?";
+
+		try {
+			connection = DatabaseConnection.getConnection();
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+
+			int rowsAffected = statement.executeUpdate();
+			return rowsAffected > 0;
+
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, type.getName() + "DAO:delete " + e.getMessage());
+		} finally {
+			DatabaseConnection.close(statement);
+			DatabaseConnection.close(connection);
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Converts a {@link ResultSet} into a list of objects of type {@code T}
+	 * using reflection to call setter methods for each field.
+	 *
+	 * @param resultSet the result set from a SQL query
+	 * @return a list of instances of {@code T}
+	 */
 	private List<T> createObjects(ResultSet resultSet) {
 		List<T> list = new ArrayList<T>();
 		Constructor[] ctors = type.getDeclaredConstructors();
@@ -242,5 +323,19 @@ public class AbstractDAO<T> {
 		}
 
         return list;
+	}
+
+	/**
+	 * Resolves the SQL-safe table name for certain keywords such as "Order".
+	 * Adds backticks to avoid conflicts with SQL reserved keywords.
+	 *
+	 * @param className the name of the class (used as table name)
+	 * @return the resolved table name
+	 */
+	private String resolveTableName(String className) {
+		if (className.equalsIgnoreCase("Order")) {
+			return "`Order`";
+		}
+		return className;
 	}
 }

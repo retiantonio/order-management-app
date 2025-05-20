@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.ordermanagement.ClientView"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox id="clientViewVB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="300.0" stylesheets="@../../../CSS/client-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.ClientController">
+   <children>
+      <HBox spacing="5.0">
+         <children>
+            <TextField fx:id="clientNameTF" promptText="Name" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label id="clientViewMediumLabel" text="Address:" />
+            <TextField id="clientViewTF" fx:id="clientAddressTF" promptText="client's address" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label id="clientViewMediumLabel" prefHeight="25.0" prefWidth="157.0" text="Phone number:" />
+            <TextField id="clientViewTF" fx:id="clientPhoneTF" promptText="client's number" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" spacing="15.0">
+         <children>
+            <Button id="clientViewSaveButton" mnemonicParsing="false" onAction="#deleteClient" text="Delete" />
+            <Button id="clientViewSaveButton" mnemonicParsing="false" onAction="#saveClient" text="Save" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+</VBox>

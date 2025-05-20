@@ -3,6 +3,7 @@ module com.example.ordermanagement {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires mysql.connector.j;
 
 
     opens com.example.ordermanagement to javafx.fxml;

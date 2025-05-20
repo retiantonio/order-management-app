@@ -2,33 +2,70 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="productVB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" spacing="15.0" stylesheets="@../../../CSS/product-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.ProductController">
+<VBox id="productVB" fx:id="productViewVB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="250.0" spacing="15.0" stylesheets="@../../../CSS/product-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.ProductController">
    <children>
-      <TextField fx:id="productNameTF" alignment="TOP_LEFT" prefHeight="3.0" prefWidth="230.0" promptText="Name" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button id="productOrderButton" mnemonicParsing="false" onAction="#deleteProduct" text="Delete" />
+         </children>
+      </HBox>
+      <TextField fx:id="productNameTF" alignment="TOP_LEFT" promptText="Name" />
       <VBox>
          <children>
-            <TextField id="productViewTF" fx:id="productInStoreTF" promptText="Available in store?" />
-            <TextField id="productViewTF" fx:id="productStockTF" promptText="Is it in stock?" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../IMAGES/star-rating.png" />
+                        <Image url="@../../../IMAGES/in-store-icon.png" />
                      </image>
                   </ImageView>
-                  <TextField id="productViewTF" fx:id="productRatingTF" promptText="Rating?" />
+                  <TextField fx:id="productInStoreTF" promptText="Available in store?" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label id="productStockLabel" graphicTextGap="8.0" prefHeight="25.0" prefWidth="224.0" text="Pieces in stock:">
+                     <graphic>
+                        <ImageView fitHeight="8.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../IMAGES/dot-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <TextField fx:id="productStockTF" promptText="how many?" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label id="productRatingLabel" prefHeight="25.0" prefWidth="117.0" text="Rating:">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../IMAGES/star-rating.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <TextField fx:id="productRatingTF" promptText="Rating?" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <TextField fx:id="productPriceTF" promptText="price" />
-      <HBox alignment="BOTTOM_CENTER" spacing="5.0">
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <TextField fx:id="productPriceTF" prefHeight="44.0" prefWidth="99.0" promptText="price" text="2399.99" />
+            <Label id="productPriceLabel" prefHeight="30.0" prefWidth="83.0" text="lei" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" spacing="5.0">
          <children>
             <Button fx:id="productOrderButton" mnemonicParsing="false" onAction="#addToOrder" text="Add to an order" />
             <Button fx:id="productModifyButton" mnemonicParsing="false" onAction="#saveProduct" text="Save" />

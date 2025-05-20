@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="clientViewVB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" spacing="15.0" stylesheets="@../../../CSS/client-view-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ordermanagement.OrderController">
+   <children>
+      <HBox>
+         <children>
+            <Label id="clientViewBigLabel" text="Order #" />
+            <Label id="clientViewBigLabel" fx:id="orderIDLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="4.0">
+         <children>
+            <Label id="clientViewMediumLabel" text="Product:" />
+            <Label id="clientViewMediumLabel" fx:id="orderProductLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="4.0">
+         <children>
+            <Label id="clientViewMediumLabel" text="Client:" />
+            <Label id="clientViewMediumLabel" fx:id="orderClientLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="4.0">
+         <children>
+            <Label id="clientViewMediumLabel" text="Price:" />
+            <Label id="clientViewMediumLabel" fx:id="orderPriceLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="4.0">
+         <children>
+            <Label id="clientViewMediumLabel" text="Quantity:" />
+            <Label id="clientViewMediumLabel" fx:id="orderQuantityLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="4.0">
+         <children>
+            <Label id="clientViewMediumLabel" text="Address:" />
+            <Label id="clientViewMediumLabel" fx:id="orderAddressLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="4.0">
+         <children>
+            <Label id="clientViewMediumLabel" text="Date:" />
+            <Label id="clientViewMediumLabel" fx:id="orderDateLabel" text="Label" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+</VBox>
